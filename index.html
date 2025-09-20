@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>UEFA League • Qualifying Simulator</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<header>
+  <h1>UEFA League → Qualification (Prototype)</h1>
+  <p>Paste the latest <strong>Euro quarter-finalists</strong>, hit “Build Leagues”, tweak as needed, then “Run Simulation”.</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>1) Inputs</h2>
+    <div class="row">
+      <div class="col">
+        <label>Euro Quarter-finalists (8 lines)</label>
+        <textarea id="qfInput" spellcheck="false"></textarea>
+      </div>
+      <div class="col">
+        <label>Prev Cycle Leagues (optional JSON)</label>
+        <textarea id="prevInput" spellcheck="false" placeholder='Leave empty to use defaults from data.js'></textarea>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="buildBtn">Build Leagues</button>
+      <button id="runBtn" disabled>Run Simulation</button>
+      <button id="resetBtn" class="secondary">Reset</button>
+    </div>
+    <p class="hint">
+      Rules: L1 refresh = QF eight. Cascade fill L2→L6. Ensure at least 1 up / 1 down per adjacent pair (except if all 8 QF were already in L1).
+      Euro slots example (24): L1 top 6 qualify; L2 top 3 qualify; L3 top 2 qualify; L4 winner qualifies; L5 winner to playoffs; L6 none.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>2) Leagues (after applying rules)</h2>
+    <div id="leaguesView" class="grid"></div>
+  </section>
+
+  <section class="card">
+    <h2>3) Results (simulation)</h2>
+    <div class="sim-params">
+      <label>Home advantage (Elo): <input type="number" id="homeAdv" value="60" /></label>
+      <label>Draw bias (0–1): <input type="number" id="drawBias" value="0.26" step="0.01" min="0" max="1"/></label>
+      <button id="rerollBtn" class="secondary" disabled>Reroll</button>
+    </div>
+    <div id="results"></div>
+  </section>
+</main>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
